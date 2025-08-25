@@ -1,12 +1,12 @@
 // -----------------------------------------------------------------------------
 // FILE: src/App.jsx
-// PURPOSE: The main application component. It connects to Sisense and renders
-//          the embedded widgets using the Compose SDK.
+// LOCATION: /src/App.jsx
 // -----------------------------------------------------------------------------
 
 import React from 'react';
 import { SisenseContextProvider, Chart } from '@sisense/sdk-ui';
-import { measureFactory, attributeFactory } from '@sisense/sdk-data';
+// FIX: Import the entire data model SDK as a namespace (DM)
+import * as DM from '@sisense/sdk-data';
 
 // --- Configuration ---
 const SISENSE_URL = "https://aesandbox.sisensepoc.com"; // Your provided Sisense URL
@@ -35,11 +35,13 @@ function App() {
               chartType="column"
               dataOptions={{
                 category: [
-                  attributeFactory.create({ name: 'category', Lsid: 'category' })
+                  // FIX: Use the DM namespace
+                  DM.attributeFactory.create({ name: 'category', Lsid: 'category' })
                 ],
                 value: [
-                  measureFactory.create({ name: 'rate_pct', aggregation: 'sum', Lsid: 'rate_pct' }),
-                  measureFactory.create({ name: 'annualized_rate_pct', aggregation: 'sum', Lsid: 'annualized_rate_pct' })
+                  // FIX: Use the DM namespace
+                  DM.measureFactory.create({ name: 'rate_pct', aggregation: 'sum', Lsid: 'rate_pct' }),
+                  DM.measureFactory.create({ name: 'annualized_rate_pct', aggregation: 'sum', Lsid: 'annualized_rate_pct' })
                 ],
               }}
               styleOptions={{ height: 450 }}
@@ -54,10 +56,12 @@ function App() {
               chartType="bar"
               dataOptions={{
                 category: [
-                  attributeFactory.create({ name: 'tenure_bucket', Lsid: 'tenure_bucket' })
+                  // FIX: Use the DM namespace
+                  DM.attributeFactory.create({ name: 'tenure_bucket', Lsid: 'tenure_bucket' })
                 ],
                 value: [
-                  measureFactory.create({ name: 'voluntary_turnover_rate_pct', aggregation: 'sum', Lsid: 'voluntary_turnover_rate_pct' })
+                  // FIX: Use the DM namespace
+                  DM.measureFactory.create({ name: 'voluntary_turnover_rate_pct', aggregation: 'sum', Lsid: 'voluntary_turnover_rate_pct' })
                 ],
               }}
               styleOptions={{ 
