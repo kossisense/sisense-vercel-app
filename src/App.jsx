@@ -30,8 +30,8 @@ function App() {
             <h2 style={{ marginBottom: '1rem' }}>Turnover Rate vs. Annualized Rate</h2>
             <WidgetById
               // IMPORTANT: Replace with your actual Dashboard and Widget IDs
-              dashboardOid="662a9b85d1e1ae0017fa0d01"
-              widgetOid="662a9b85d1e1ae0017fa0d06"
+              dashboardOid="68a65b283381e1a0b17fa86f"
+              widgetOid="68a8abbe3381e1a0b17fa8d1"
               styleOptions={{ height: 450 }}
             />
           </div>
@@ -41,8 +41,8 @@ function App() {
             <h2 style={{ marginBottom: '1rem' }}>Voluntary Turnover by Tenure</h2>
              <WidgetById
               // IMPORTANT: Replace with your actual Dashboard and Widget IDs
-              dashboardOid="662a9b85d1e1ae0017fa0d01"
-              widgetOid="YOUR_SECOND_WIDGET_OID"
+              dashboardOid="68a65b283381e1a0b17fa86f"
+              widgetOid="68a8a9a93381e1a0b17fa8ca"
               styleOptions={{ height: 450 }}
             />
           </div>
@@ -54,3 +54,4 @@ function App() {
 }
 
 export default App;
+
