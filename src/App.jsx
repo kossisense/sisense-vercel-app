@@ -4,7 +4,6 @@
 // -----------------------------------------------------------------------------
 
 import React from 'react';
-// FIX: Import WidgetById instead of Chart
 import { SisenseContextProvider, WidgetById } from '@sisense/sdk-ui';
 
 // --- Configuration ---
@@ -12,11 +11,25 @@ const SISENSE_URL = "https://aesandbox.sisensepoc.com"; // Your provided Sisense
 const SISENSE_WAT = import.meta.env.VITE_SISENSE_WAT; // Reads the WAT from Vercel Environment Variables
 
 function App() {
+  // FIX: Check if the Web Access Token exists. If not, show an error.
+  if (!SISENSE_WAT) {
+    return (
+      <div style={{ padding: '2rem', fontFamily: 'Arial, sans-serif', color: 'red', textAlign: 'center' }}>
+        <h1>Configuration Error</h1>
+        <p>The Sisense Web Access Token is missing.</p>
+        <p>Please ensure the VITE_SISENSE_WAT environment variable is set in your Vercel project settings.</p>
+      </div>
+    );
+  }
+
   return (
     // The SisenseContextProvider connects your app to your Sisense instance
     <SisenseContextProvider
       url={SISENSE_URL}
-      wat={SISENSE_WAT}
+      // FIX: Explicitly define the authentication method
+      auth={{
+        wat: SISENSE_WAT
+      }}
     >
       {/* Main container for the dashboard layout */}
       <div style={{ padding: '2rem', fontFamily: 'Arial, sans-serif', backgroundColor: '#f4f6f9' }}>
@@ -29,7 +42,6 @@ function App() {
           <div style={{ padding: '1.5rem', backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
             <h2 style={{ marginBottom: '1rem' }}>Turnover Rate vs. Annualized Rate</h2>
             <WidgetById
-              // IMPORTANT: Replace with your actual Dashboard and Widget IDs
               dashboardOid="68a65b283381e1a0b17fa86f"
               widgetOid="68a8abbe3381e1a0b17fa8d1"
               styleOptions={{ height: 450 }}
@@ -40,9 +52,8 @@ function App() {
           <div style={{ padding: '1.5rem', backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
             <h2 style={{ marginBottom: '1rem' }}>Voluntary Turnover by Tenure</h2>
              <WidgetById
-              // IMPORTANT: Replace with your actual Dashboard and Widget IDs
               dashboardOid="68a65b283381e1a0b17fa86f"
-              widgetOid="68a8a9a93381e1a0b17fa8ca"
+              widgetOid="68a8a9a93381e1a0b17fa8ca" // IMPORTANT: Replace this placeholder
               styleOptions={{ height: 450 }}
             />
           </div>
@@ -54,4 +65,5 @@ function App() {
 }
 
 export default App;
+
 
